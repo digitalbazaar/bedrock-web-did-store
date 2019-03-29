@@ -1,0 +1,33 @@
+{
+  "name": "bedrock-web-did-store",
+  "version": "0.0.1-0",
+  "description": "Enables storage and management of DIDs in a Web App",
+  "main": "index.js",
+  "scripts": {
+    "docs": "rm ./docs/*.md && node ./docs/generate.js"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-web-did-store"
+  },
+  "keywords": [
+    "bedrock"
+  ],
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/bedrock-web-did-store/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/bedrock-web-did-store",
+  "devDependencies": {
+    "eslint": "^5.15.1",
+    "eslint-config-digitalbazaar": "^1.8.0",
+    "eslint-plugin-jsdoc": "^4.1.0",
+    "jsdoc": "^3.5.5",
+    "jsdoc-to-markdown": "^4.0.1"
+  }
+}
