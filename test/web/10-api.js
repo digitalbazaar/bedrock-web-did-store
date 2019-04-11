@@ -69,4 +69,37 @@ describe('describe', () => {
     doc.should.eql(expectedDoc);
     meta.should.eql({sequence: 0});
   });
+  it('creates a data hub with a new DID as the controller', async () => {
+    // this test does not use the datahub setup in before
+    const didDocument = await v1.generate({
+      generateKey: kmsApi.generateKey.bind(kmsApi),
+    });
+
+    // FIXME: attempting to create a datahub with a DID as the controller based
+    // on step 3 in the "Using DIDs in a Web Application" spec that states:
+    // Create a Data Hub where `config.controller` is the new DID
+
+    // FIXME: the creation of the datahub fails because `config.controller`
+    // is expected to be the bedrock-account.id or the permission check on
+    // creating a datahub fails
+
+    const did = didDocument.id;
+    // Use the Master Key to create KEK and HMAC keys
+    const kek = await kmsApi.generateKey({type: 'kek'});
+    const hmac = await kmsApi.generateKey({type: 'hmac'});
+
+    const config = {
+      sequence: 0,
+      controller: did,
+      primary: true,
+      kek: {id: kek.id, algorithm: kek.algorithm},
+      hmac: {id: hmac.id, algorithm: hmac.algorithm}
+    };
+
+    const dhs = new DataHubService();
+    const remoteConfig = await dhs.create({config});
+    const hub = new DataHub({config: remoteConfig, kek, hmac});
+
+    didStore = new DidStore({hub});
+  });
 });
