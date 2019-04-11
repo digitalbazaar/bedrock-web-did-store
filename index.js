@@ -3,8 +3,4 @@
  */
 'use strict';
 
-import Store from './Store';
-
-export {
-  Store
-};
+export {DidStore} from './DidStore.js';

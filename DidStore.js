@@ -5,7 +5,7 @@
 
 import uuid from 'uuid-random';
 
-class Store {
+export class DidStore {
   constructor({dataHub}) {
     this.dataHub = dataHub;
   }
@@ -24,5 +24,3 @@ class Store {
     });
   }
 }
-
-export default Store;
