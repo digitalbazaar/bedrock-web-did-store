@@ -8,10 +8,15 @@ import {DidStore} from 'bedrock-web-did-store';
 import {AccountMasterKey, KmsService} from 'bedrock-web-kms';
 import {DataHub, DataHubService} from 'bedrock-web-data-hub';
 
+import {VeresOne} from 'did-veres-one';
+const v1 = new VeresOne();
+
 let didStore;
 let kmsApi;
 
 describe('describe', () => {
+
+  // setup didStore
   before(async () => {
     const kmsPlugin = 'ssm-v1';
     const kmsService = new KmsService();
@@ -43,9 +48,25 @@ describe('describe', () => {
     const hub = new DataHub({config: remoteConfig, kek, hmac});
 
     didStore = new DidStore({hub});
-  });
+  }); // end setup didStore
 
   it('stores and retrieves a DID', async () => {
+    const didDocument = await v1.generate({
+      generateKey: kmsApi.generateKey.bind(kmsApi),
+    });
 
+    const expectedDoc = didDocument.doc;
+    const did = didDocument.id;
+
+    await didStore.insert(didDocument);
+
+    const result = await didStore.get({id: did});
+
+    should.exist(result);
+    result.should.be.an('object');
+    Object.keys(result).should.have.same.members(['doc', 'meta']);
+    const {doc, meta} = result;
+    doc.should.eql(expectedDoc);
+    meta.should.eql({sequence: 0});
   });
 });
