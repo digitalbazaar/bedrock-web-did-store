@@ -14,7 +14,7 @@
     "bedrock-identity": "^6.0.0",
     "bedrock-karma": "^1.4.0",
     "bedrock-key": "^5.1.2",
-    "bedrock-kms": "github:digitalbazaar/bedrock-kms#generateKeyPair",
+    "bedrock-kms": "github:digitalbazaar/bedrock-kms#initial",
     "bedrock-kms-http": "digitalbazaar/bedrock-kms-http#initial",
     "bedrock-mongodb": "^5.5.0",
     "bedrock-package-manager": "^1.0.0",
