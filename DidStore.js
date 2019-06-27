@@ -6,12 +6,14 @@
 // import uuid from 'uuid-random';
 
 export class DidStore {
-  constructor({hub}) {
+  constructor({hub, invocationSigner}) {
     this.hub = hub;
+    this.invocationSigner = invocationSigner;
   }
 
   async get({id}) {
-    const {content: {doc, meta}} = await this.hub.get({id});
+    const {invocationSigner} = this;
+    const {content: {doc, meta}} = await this.hub.get({id, invocationSigner});
     return {doc, meta};
   }
 
@@ -26,6 +28,7 @@ export class DidStore {
       }
     };
 
-    return this.hub.insert({doc: hubDoc});
+    const {invocationSigner} = this;
+    return this.hub.insert({doc: hubDoc, invocationSigner});
   }
 }
