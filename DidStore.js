@@ -17,7 +17,7 @@ export class DidStore {
     return {doc, meta};
   }
 
-  async insert({doc, meta}) {
+  async put({doc, meta}) {
     // get public representation of DID
     const hubDoc = {
       id: doc.id,
