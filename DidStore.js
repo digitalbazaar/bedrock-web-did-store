@@ -13,20 +13,16 @@ export class DidStore {
 
   async get({id}) {
     const {invocationSigner} = this;
-    const {content: {doc, meta}} = await this.hub.get({id, invocationSigner});
+    const {content: doc, meta} = await this.hub.get({id, invocationSigner});
     return {doc, meta};
   }
 
   async put({doc, meta}) {
     // get public representation of DID
     const hubDoc = {
-      content: {
-        doc,
-        // meta === {sequence: 0}
-        meta,
-      }
+      content: {...doc},
+      meta: {...meta}
     };
-
     const {invocationSigner} = this;
     return this.hub.insert({doc: hubDoc, invocationSigner});
   }
