@@ -20,7 +20,6 @@ export class DidStore {
   async put({doc, meta}) {
     // get public representation of DID
     const hubDoc = {
-      id: doc.id,
       content: {
         doc,
         // meta === {sequence: 0}
