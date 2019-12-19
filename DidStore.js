@@ -3,27 +3,25 @@
  */
 'use strict';
 
-// import uuid from 'uuid-random';
-
 export class DidStore {
-  constructor({hub, invocationSigner}) {
-    this.hub = hub;
+  constructor({edv, invocationSigner}) {
+    this.edv = edv;
     this.invocationSigner = invocationSigner;
   }
 
   async get({id}) {
     const {invocationSigner} = this;
-    const {content: doc, meta} = await this.hub.get({id, invocationSigner});
+    const {content: doc, meta} = await this.edv.get({id, invocationSigner});
     return {doc, meta};
   }
 
   async put({doc, meta}) {
     // get public representation of DID
-    const hubDoc = {
+    const devDoc = {
       content: {...doc},
       meta: {...meta}
     };
     const {invocationSigner} = this;
-    return this.hub.insert({doc: hubDoc, invocationSigner});
+    return this.edv.insert({doc: devDoc, invocationSigner});
   }
 }
